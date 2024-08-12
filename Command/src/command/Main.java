@@ -10,10 +10,15 @@ public class Main {
 			GarageDoorOnCommand abrirGaragem = new GarageDoorOnCommand(gd1);
 			CeilingFanOnCommand ligarVentilador = new CeilingFanOnCommand(cf1);
 			
-			Backup br = new Backup();
-			br.store(abrirGaragem);
-			br.store(ligarVentilador);
-			br.load();
+			SimpleRemoteControl remote = new SimpleRemoteControl();
+			
+			remote.setCommand(ligarVentilador);
+			remote.buttonWasPressed();
+			remote.setCommand(abrirGaragem);
+			remote.buttonWasPressed();
+			
+			remote.load();
+
 	}
 
 }

@@ -11,8 +11,8 @@ public class GarageDoorOnCommand implements Command {
 
 
 	@Override
-	public String execute() {
-		return garageDoor.up();
+	public void execute() {
+		garageDoor.up();
 	}
 
 

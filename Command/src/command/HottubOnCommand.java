@@ -10,10 +10,10 @@ public class HottubOnCommand implements Command {
 
 
 	@Override
-	public String execute() {
+	public void execute() {
 		// TODO Auto-generated method stub
 		hottub.circulate();
-		return "estava circulando água na banheira";
+		System.out.println("circulando água na banheira");
 	}
 
 

@@ -3,15 +3,15 @@ package command;
 
 public class GarageDoor {
 	
-	public String up() {
-		return "abrindo porta da garagem";
+	public void up() {
+		System.out.println("abrindo porta da garagem");
 	}
 	
-	public String down() {
-		return "fechando porta da garagem";
+	public void down() {
+		System.out.println("fechando porta da garagem");
 	}
 
-	public String stop() {
-		return "parando porta da garagem";
+	public void stop() {
+		System.out.println("parando porta da garagem");
 	}
 }

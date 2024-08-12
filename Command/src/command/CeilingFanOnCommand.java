@@ -10,10 +10,9 @@ public class CeilingFanOnCommand implements Command{
 	}
 
 	@Override
-	public String execute() {
-		// TODO Auto-generated method stub
+	public void execute() {
 		ceilingfan.on();
-		return "ventilador ligado";
+		
 	}
 
 	
