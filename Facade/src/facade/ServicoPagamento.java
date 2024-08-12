@@ -3,7 +3,8 @@ package facade;
 public class ServicoPagamento {
 	
 	public static boolean makePayment(){
-	/*Conecta-se a um serviço externo para efetuar o pagamento*/
-	return true;
+	
+		System.out.println("Pagamento aprovado e pedido realizado com sucesso.");
+		return true;
 	}
 }

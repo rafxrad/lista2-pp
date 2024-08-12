@@ -3,7 +3,7 @@ package facade;
 public class ServicoEstoque {
 
 	public static boolean isAvailable(Produto product){
-/*Verifica se o produto está disponível no estoque*/
+		System.out.println("Produto " + product.getName() + " disponível em estoque");
 		return true;
 	}
 }
