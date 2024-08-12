@@ -15,5 +15,8 @@ public class HottubOnCommand implements Command {
 		hottub.circulate();
 		return "estava circulando água na banheira";
 	}
+
+
+
 	
 }

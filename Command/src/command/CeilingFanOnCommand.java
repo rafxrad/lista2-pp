@@ -1,5 +1,6 @@
 package command;
 
+
 public class CeilingFanOnCommand implements Command{
 
 	CeilingFan ceilingfan;
@@ -11,9 +12,11 @@ public class CeilingFanOnCommand implements Command{
 	@Override
 	public String execute() {
 		// TODO Auto-generated method stub
-		ceilingfan.low();
-		return "ventilador estava em baixa potência";
+		ceilingfan.on();
+		return "ventilador ligado";
 	}
+
+	
 	
 
 }
