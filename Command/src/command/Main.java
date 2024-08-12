@@ -4,17 +4,18 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-			GarageDoor gd1 = new GarageDoor();
+			TV tv1 = new TV();
 			CeilingFan cf1 = new CeilingFan();
 			
-			GarageDoorOnCommand abrirGaragem = new GarageDoorOnCommand(gd1);
+			TVOnCommand ligarTV = new TVOnCommand(tv1);
 			CeilingFanOnCommand ligarVentilador = new CeilingFanOnCommand(cf1);
+			
 			
 			SimpleRemoteControl remote = new SimpleRemoteControl();
 			
 			remote.setCommand(ligarVentilador);
 			remote.buttonWasPressed();
-			remote.setCommand(abrirGaragem);
+			remote.setCommand(ligarTV);
 			remote.buttonWasPressed();
 			
 			remote.load();
