@@ -6,7 +6,6 @@ public class SimpleRemoteControl {
 	
 	Command slot;
 	private ArrayList<Command> backup = new ArrayList<Command>();
-//	SimpleRemoteControl remote = new SimpleRemoteControl();
 	
 	
 	public SimpleRemoteControl() {}
@@ -27,7 +26,6 @@ public class SimpleRemoteControl {
 		}
 		
 	}
-	
 	
 	public void buttonWasPressed() {
 		slot.execute();
