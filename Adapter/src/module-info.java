@@ -1,2 +1,2 @@
-module Adapter {
+module Facade {
 }
