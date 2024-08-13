@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class GameConfiguration {
 	
@@ -28,10 +29,30 @@ public class GameConfiguration {
 
 	
 	private GameConfiguration() {
+		
+		String path = "/Users/rcosta/Documents/lista2-pp/Singleton/src/config.txt";
 
+		
+		Map<String, Consumer<String>> propertyMap = new HashMap<>();
+		
+			propertyMap.put("appID", value -> this.appID = value);
+			propertyMap.put("buildID", value -> this.buildID = value);
+			propertyMap.put("offline", value -> this.offline = value);
+			propertyMap.put("autoDLC", value -> this.autoDLC = value);
+			propertyMap.put("updateDB", value -> this.updateDB = value);
+			propertyMap.put("waitForExit", value -> this.waitForExit = value);
+			propertyMap.put("noOperation", value -> this.noOperation = value);
+			propertyMap.put("userName", value -> this.userName = value);
+			propertyMap.put("language", value -> this.language = value);
+			propertyMap.put("signature", value -> this.signature = value);
+			propertyMap.put("windowInfo", value -> this.windowInfo = value);
+			propertyMap.put("LVWWindowInfo", value -> this.LVWindowInfo = value);
+			propertyMap.put("applicationPath", value -> this.applicationPath = value);
+			propertyMap.put("workingDirectory", value -> this.workingDirectory = value);
+			
+		
 				try {
-					FileReader fileReader = new FileReader("/Users/rcosta/Documents/lista2-pp/Singleton/src/config.txt");
-					BufferedReader bufferedReader = new BufferedReader(fileReader);
+					BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
 					
 					String line; 
 		            String[] result;
