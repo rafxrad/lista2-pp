@@ -11,21 +11,21 @@ public class GameConfiguration {
 	
 	private static GameConfiguration uniqueInstance;
 	
-	private String appID;
-	private String buildID;
-	private String offline;
-	private String autoDLC;
-	private String updateDB;
-	private String waitForExit;
-	private String noOperation;
+	private String AppId;
+	private String BuildId;
+	private String Offline;
+	private String AutoDLC;
+	private String UpdateDB;
+	private String WaitForExit;
+	private String NoOperation;
 	private String DLCName;
-	private String userName;
-	private String language;
-	private String signature;
-	private String windowInfo;
+	private String UserName;
+	private String Language;
+	private String Signature;
+	private String WindowInfo;
 	private String LVWindowInfo;
-	private String applicationPath;
-	private String workingDirectory;
+	private String ApplicationPath;
+	private String WorkingDirectory;
 
 	
 	private GameConfiguration() {
@@ -35,118 +35,67 @@ public class GameConfiguration {
 		
 		Map<String, Consumer<String>> propertyMap = new HashMap<>();
 		
-			propertyMap.put("appID", value -> this.appID = value);
-			propertyMap.put("buildID", value -> this.buildID = value);
-			propertyMap.put("offline", value -> this.offline = value);
-			propertyMap.put("autoDLC", value -> this.autoDLC = value);
-			propertyMap.put("updateDB", value -> this.updateDB = value);
-			propertyMap.put("waitForExit", value -> this.waitForExit = value);
-			propertyMap.put("noOperation", value -> this.noOperation = value);
-			propertyMap.put("userName", value -> this.userName = value);
-			propertyMap.put("language", value -> this.language = value);
-			propertyMap.put("signature", value -> this.signature = value);
-			propertyMap.put("windowInfo", value -> this.windowInfo = value);
-			propertyMap.put("LVWWindowInfo", value -> this.LVWindowInfo = value);
-			propertyMap.put("applicationPath", value -> this.applicationPath = value);
-			propertyMap.put("workingDirectory", value -> this.workingDirectory = value);
+			propertyMap.put("AppId", value -> this.AppId = value);
+			propertyMap.put("BuildId", value -> this.BuildId = value);
+			propertyMap.put("Offline", value -> this.Offline = value);
+			propertyMap.put("AutoDLC", value -> this.AutoDLC = value);
+			propertyMap.put("UpdateDB", value -> this.UpdateDB = value);
+			propertyMap.put("WaitForExit", value -> this.WaitForExit = value);
+			propertyMap.put("NoOperation", value -> this.NoOperation = value);
+			propertyMap.put("DLCName", value -> this.DLCName = value);
+			propertyMap.put("UserName", value -> this.UserName = value);
+			propertyMap.put("Language", value -> this.Language = value);
+			propertyMap.put("Signature", value -> this.Signature = value);
+			propertyMap.put("WindowInfo", value -> this.WindowInfo = value);
+			propertyMap.put("LVWindowInfo", value -> this.LVWindowInfo = value);
+			propertyMap.put("ApplicationPath", value -> this.ApplicationPath = value);
+			propertyMap.put("WorkingDirectory", value -> this.WorkingDirectory = value);
 			
 		
-				try {
-					BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-					
-					String line; 
-		            String[] result;
-		            while ((line = bufferedReader.readLine()) != null) {
-		                result = line.split("=");
-		                
-		                switch (result[0]) {
-						case "AppId": {
-							this.appID = result[1];
-							break;
-						}
-						
-						case "UserName": {
-							this.userName = result[1];
-							break;
-						}
-						
-						case "Language": {
-							this.language = result[1];
-							break;
-						}
-						
-						case "Offline": {
-							this.offline = result[1];
-							break;
-						}
-						
-						case "AutoDLC": {
-							this.autoDLC = result[1];
-							break;
-						}
-						
-						case "BuildId": {
-							this.buildID = result[1];
-							break;
-						
-						}
-						
-						case "DLCName": {
-							this.DLCName = result[1];
-							break;
-						}
-						
-						case "UpdateDB": {
-							this.updateDB = result[1];
-							break;
-						}
-						
-						case "Signature": {
-							this.signature = result[1];
-							break;
-						}
-						
-						case "WindowInfo": {
-							this.windowInfo = result[1];
-							break;
-						}
-						
-						case "LVWindowInfo": {
-							this.LVWindowInfo = result[1];
-							break;
-						}
-						
-						case "ApplicationPath": {
-							this.applicationPath = result[1];
-							break;
-							
-						}
-						
-						case "WorkingDirectory": {
-							this.workingDirectory = result[1];
-							break;
-						}
-						
-						case "WaitForExit": {
-							this.waitForExit = result[1];
-							break;
-						}
-						
-						case "NoOperation": {
-							this.noOperation = result[1];
-							break;
-						}
-						
-						default:throw new IllegalArgumentException("Unexpected value: " + result[1]);
-						
-		                }
-		   }
-		            
-		   bufferedReader.close();
-		   } catch (IOException e) {
-		            System.out.println("Erro ao ler arquivo: " + e.getMessage());
-		 }
-		}
+			try {
+				
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+				
+				String line = bufferedReader.readLine(); 
+				
+	            while (line != null) {
+	            	
+	                String[] result = line.split("=", 2);
+	       
+	                
+	                if (result.length == 2) {
+	                	
+	                	String chave = result[0].trim();
+	                	String value = result[1].trim();
+	                	
+	                	Consumer<String> propertySetter = propertyMap.get(chave);
+	                	
+		                 if (propertySetter != null) {
+		                		
+		                		propertySetter.accept(value);
+		                		
+		                 } else {
+		                		
+		                		System.out.println("Chave não encontrada " + chave);
+		                 } 
+		                 
+                } else {
+            	
+            			System.out.println("Linha não encontrada");
+                }
+	               
+	                line = bufferedReader.readLine(); 
+	               
+	         }
+			
+	           
+	            
+	            bufferedReader.close();
+			   } catch (IOException e) {
+			            System.out.println("Erro ao ler arquivo: " + e.getMessage());
+			 }
+			}
+
 			
 	
 	
@@ -156,139 +105,235 @@ public class GameConfiguration {
 			}
 			return uniqueInstance;
 		}
-	
-		
-		
-	
+
+
+
+
 		@Override
 		public String toString() {
-			return "GameConfiguration [appID=" + appID + ", buildID=" + buildID + ", offline=" + offline + ", autoDLC="
-					+ autoDLC + ", updateDB=" + updateDB + ", waitForExit=" + waitForExit + ", noOperation=" + noOperation
-					+ ", DLCName=" + DLCName + ", userName=" + userName + ", language=" + language + ", signature="
-					+ signature + ", windowInfo=" + windowInfo + ", LVWindowInfo=" + LVWindowInfo + ", applicationPath="
-					+ applicationPath + ", workingDirectory=" + workingDirectory + "]";
+			return "GameConfiguration [AppId=" + AppId + ", BuildId=" + BuildId + ", Offline=" + Offline + ", AutoDLC="
+					+ AutoDLC + ", UpdateDB=" + UpdateDB + ", WaitForExit=" + WaitForExit + ", NoOperation="
+					+ NoOperation + ", DLCName=" + DLCName + ", UserName=" + UserName + ", Language=" + Language
+					+ ", Signature=" + Signature + ", WindowInfo=" + WindowInfo + ", LVWindowInfo=" + LVWindowInfo
+					+ ", ApplicationPath=" + ApplicationPath + ", WorkingDirectory=" + WorkingDirectory + "]";
 		}
-	
-		public String getAppID() {
-			return appID;
+
+
+
+
+		public String getAppId() {
+			return AppId;
 		}
-	
-		public void setAppID(String appID) {
-			this.appID = appID;
+
+
+
+
+		public void setAppId(String appId) {
+			AppId = appId;
 		}
-	
-		public String getBuildID() {
-			return buildID;
+
+
+
+
+		public String getBuildId() {
+			return BuildId;
 		}
-	
-		public void setBuildID(String buildID) {
-			this.buildID = buildID;
+
+
+
+
+		public void setBuildId(String buildId) {
+			BuildId = buildId;
 		}
-	
+
+
+
+
 		public String getOffline() {
-			return offline;
+			return Offline;
 		}
-	
+
+
+
+
 		public void setOffline(String offline) {
-			this.offline = offline;
+			Offline = offline;
 		}
-	
+
+
+
+
 		public String getAutoDLC() {
-			return autoDLC;
+			return AutoDLC;
 		}
-	
+
+
+
+
 		public void setAutoDLC(String autoDLC) {
-			this.autoDLC = autoDLC;
+			AutoDLC = autoDLC;
 		}
-	
+
+
+
+
 		public String getUpdateDB() {
-			return updateDB;
+			return UpdateDB;
 		}
-	
+
+
+
+
 		public void setUpdateDB(String updateDB) {
-			this.updateDB = updateDB;
+			UpdateDB = updateDB;
 		}
-	
+
+
+
+
 		public String getWaitForExit() {
-			return waitForExit;
+			return WaitForExit;
 		}
-	
+
+
+
+
 		public void setWaitForExit(String waitForExit) {
-			this.waitForExit = waitForExit;
+			WaitForExit = waitForExit;
 		}
-	
+
+
+
+
 		public String getNoOperation() {
-			return noOperation;
+			return NoOperation;
 		}
-	
+
+
+
+
 		public void setNoOperation(String noOperation) {
-			this.noOperation = noOperation;
+			NoOperation = noOperation;
 		}
-	
+
+
+
+
 		public String getDLCName() {
 			return DLCName;
 		}
-	
+
+
+
+
 		public void setDLCName(String dLCName) {
 			DLCName = dLCName;
 		}
-	
+
+
+
+
 		public String getUserName() {
-			return userName;
+			return UserName;
 		}
-	
+
+
+
+
 		public void setUserName(String userName) {
-			this.userName = userName;
+			UserName = userName;
 		}
-	
+
+
+
+
 		public String getLanguage() {
-			return language;
+			return Language;
 		}
-	
+
+
+
+
 		public void setLanguage(String language) {
-			this.language = language;
+			Language = language;
 		}
-	
+
+
+
+
 		public String getSignature() {
-			return signature;
+			return Signature;
 		}
-	
+
+
+
+
 		public void setSignature(String signature) {
-			this.signature = signature;
+			Signature = signature;
 		}
-	
+
+
+
+
 		public String getWindowInfo() {
-			return windowInfo;
+			return WindowInfo;
 		}
-	
+
+
+
+
 		public void setWindowInfo(String windowInfo) {
-			this.windowInfo = windowInfo;
+			WindowInfo = windowInfo;
 		}
-	
+
+
+
+
 		public String getLVWindowInfo() {
 			return LVWindowInfo;
 		}
-	
+
+
+
+
 		public void setLVWindowInfo(String lVWindowInfo) {
 			LVWindowInfo = lVWindowInfo;
 		}
-	
-		public String getApplicationPath() {
-			return applicationPath;
-		}
-	
-		public void setApplicationPath(String applicationPath) {
-			this.applicationPath = applicationPath;
-		}
-	
-		public String getWorkingDirectory() {
-			return workingDirectory;
-		}
-	
-		public void setWorkingDirectory(String workingDirectory) {
-			this.workingDirectory = workingDirectory;
-		}
-	
-		
 
+
+
+
+		public String getApplicationPath() {
+			return ApplicationPath;
+		}
+
+
+
+
+		public void setApplicationPath(String applicationPath) {
+			ApplicationPath = applicationPath;
+		}
+
+
+
+
+		public String getWorkingDirectory() {
+			return WorkingDirectory;
+		}
+
+
+
+
+		public void setWorkingDirectory(String workingDirectory) {
+			WorkingDirectory = workingDirectory;
+		}
+
+
+
+		
+		
+		
 }
+
+
+				
